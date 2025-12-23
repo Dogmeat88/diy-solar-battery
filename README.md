@@ -11,10 +11,10 @@ This project is intended for experienced DIYers. High-voltage DC is hazardous �
 - Modules: 48 modules (each module = 2 cells in series)
 
 ## Estimated Costs
-- Leaf battery (used): ~NZ$3,000
+- Leaf battery (used): ~NZ$2,500
 - BMS (model-dependent): ~NZ$300
 - Misc (cables, breakers, connectors): ~NZ$300
-- Estimated total: ~NZ$3,600–3,800 (project-dependent)
+- Estimated total: ~NZ$3,100–3,300 (project-dependent)
 
 ## Safety Warning
 **WARNING — High DC voltages present.** Deconstructing or modifying EV battery packs is dangerous and can be fatal. Only work on these systems if you have the skills, tools, and PPE. Isolate circuits, verify zero voltage before touching, and follow local electrical regulations.
@@ -132,4 +132,4 @@ With exported energy rates considered, the system produced a modest profit over 
 ## Conclusion
 Is it worth it?
 
-It depends on the battery condition, purchase price and your local electricity prices. In my case I ended up with a ~14 kWh system (6 spare modules) for roughly NZ$3,700, which can be competitive with lower-end commercial battery offerings if you source a good pack.
+It depends on the battery condition, purchase price and your local electricity prices. In my case I ended up with a ~14 kWh system (6 spare modules) for roughly NZ$3,200, which can be competitive with lower-end commercial battery offerings if you source a good pack.
