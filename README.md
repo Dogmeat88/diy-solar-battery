@@ -38,6 +38,9 @@ Observed results (example):
 
 ![Battery Modules Capacity](assets/Leaf%20Module%20Capacity.jpg)
 
+Parts:
+ - [Battery Discharge Capacity Meter](https://s.click.aliexpress.com/e/_c4rQUefT)
+
 ## Reconstruction (Pack Assembly)
 - Target configuration: 14S6P (~48–58 V DC)
 - Estimated usable capacity after assembly: ~14 kWh
