@@ -1,128 +1,134 @@
 # DIY Solar Battery
 
+## Overview
+Repurposing a used Nissan Leaf 24 kWh battery pack into a home solar-storage system. This document outlines pack deconstruction, module testing, reassembly into a 14S6P pack (~48–58 V DC), BMS and inverter integration, monitoring, and parts used.
 
+This project is intended for experienced DIYers. High-voltage DC is hazardous — use appropriate PPE and only proceed if you are qualified.
 
-## Description
-This repository documents repurposing a used 20 kWh Nissan Leaf battery pack into a home solar storage system.
+## Quick Facts
+- Nominal pack configuration: 14S6P (~48–58 V DC)
+- Approximate usable capacity: ~14 kWh (pack dependent)
+- Modules: 48 modules (each module = 2 cells in series)
 
-It covers safe deconstruction and reassembly of the pack, module reconfiguration (14S6P ≈ 48–58 V DC), wiring and integration of a Battery Management System (JK-PB1A16S10P), inverter setup (Growatt SPH6000 TL BL UP), monitoring via RS485 and a Raspberry Pi, and a parts list with photos.
+## Estimated Costs
+- Leaf battery (used): ~NZ$3,000
+- BMS (model-dependent): ~NZ$300
+- Misc (cables, breakers, connectors): ~NZ$300
+- Estimated total: ~NZ$3,600–3,800 (project-dependent)
 
-Intended for experienced DIYers: high-voltage DC is hazardous. Follow proper isolation procedures, use appropriate PPE, and only perform this work if you are qualified and comfortable working with battery systems.
- 
-
-## Costs
-- Leaf Battery module: NZ$3000 (used, approximate)
-- BMS: NZ$300 (model-dependent)
-- Misc (cables, fuses, contactor, connectors): ~NZ$300
-- Estimated total (project build): ~NZ$3600–3800
-
+## Safety Warning
+**WARNING — High DC voltages present.** Deconstructing or modifying EV battery packs is dangerous and can be fatal. Only work on these systems if you have the skills, tools, and PPE. Isolate circuits, verify zero voltage before touching, and follow local electrical regulations.
 
 ## Deconstruction
-[!WARNING]
-**WARNING — High DC voltages present.** Deconstructing an EV battery is extremely dangerous and can be fatal. Only perform this work if you are experienced with high-voltage systems, have appropriate personal protective equipment (PPE), and follow proper isolation and safety procedures.
+Save all high-current busbars, copper connectors and fasteners for reuse. 
 
-![Battery pack](assets/Nissan%20Leaf%2020kWh%20%20battery%20pack.jpg)
-![Battery pack - open](assets/Nissan%20Leaf%2020kWh%20%20battery%20pack%20-%20open.jpg)
+![Battery pack](assets/Nissan%20Leaf%2024kWh%20%20battery%20pack.jpg)
+![Battery pack - open](assets/Nissan%20Leaf%2024kWh%20%20battery%20pack%20-%20open.jpg)
+![Battery pack - modules](assets/Nissan%20Leaf%2024kWh%20%20battery%20pack%20-%20modules.jpg)
 
-![Battery pack - modules](assets/Nissan%20Leaf%2020kWh%20%20battery%20pack%20-%20modules.jpg)
+## Module Testing
+- Modules: 48 (each module = 2 cells in series)
+- Test voltage range: 8.4 V (charged) down to ~6.3 V (discharged)
+- Test/discharge current used: 10 A
 
-## Reconstruction
-Battery module configuration — 14S6P (~48–58 V DC)
+Observed results (example):
+- ≈333 Wh per module
+- ≈16 kWh total raw capacity across modules (before pack reconfiguration and losses)
 
-Key reconstruction notes: ensure correct series/parallel wiring; add appropriate DC breakers and contactors on the pack main; verify insulation and strain relief for high-current conductors; and perform cell/module balancing and insulation-resistance checks before applying full charge.
+![Battery Modules Capacity](assets/Leaf%20Module%20Capacity.jpg)
+
+## Reconstruction (Pack Assembly)
+- Target configuration: 14S6P (~48–58 V DC)
+- Estimated usable capacity after assembly: ~14 kWh
+
+Key notes:
+- Verify correct series/parallel wiring and use clear labelling.
+- Fit appropriate DC breakers/contactors on the pack main.
+- Ensure insulation, strain relief, and proper crimping for high-current conductors.
+- Perform balancing, insulation-resistance (megger) checks and low-current verification before applying full charge.
+- Keep spare modules for future replacement or testing.
+
 ![Battery Module Configuration](assets/Leaf%20battery%20module%20configuration.png)
-
 ![Battery Module](assets/Battery.jpg)
 
-
 ## Inverter
-### SPH6000 TL BL UP - Hybrid Inverter
-#### Converts DC from the panels into AC for the grid/load and also manages battery charge/discharge
+### Growatt SPH6000 TL BL UP (Hybrid)
+Converts DC to AC and manages battery charging/discharging.
 ![Growatt SPH6000 TL BL UP](assets/Inverter.jpg)
-##### Parts
+
+Parts example:
 [Growatt SPH6000 TL BL UP](https://s.click.aliexpress.com/e/_c4V2mrlf)
 
-Configuration notes: I ended up setting the inverter to lead-acid mode after failing to get lithium communications working. Please test and set the voltage range to match the 14S pack — I used a conservative 49–57 V range. Wire the CT and NTC ports as required by the inverter manual.
+Configuration notes:
+- I used a conservative battery voltage window (49–57 V) for safety.
+- If lithium communication/profiles are not available, some installers use the lead-acid profile with care — verify inverter behaviour and limits before leaving the system unattended.
 
 ## Battery Management System (BMS)
 ### JK-PB1A16S10P
-#### Manages safety and health parameters of the battery
+Monitors cell voltages, balances cells, and provides protections and contactor control.
 ![JK BMS](assets/BMS.jpg)
-##### Parts
+
+Parts example:
 [JK-PB1A16S10P](https://s.click.aliexpress.com/e/_c3MiGCWl)
 
-Role: cell monitoring, balancing, over/under-voltage and temperature protection, and pack-level contactor control. Verify RS485 wiring and BMS firmware/settings for your pack configuration.
+Notes:
+- Verify RS485 wiring and BMS firmware/configuration for your pack topology.
+- Test balancing and alarm thresholds on a bench before connecting the full pack.
 
-
-
-### CT Clamp
-#### Measures grid Import/Export power
+### CT Clamp (Power Measurement)
+Used to measure import/export current for the inverter.
 ![CT Clamp - port](assets/Inverter-CT-port.png)
 ![CT Clamp](assets/CT.png)
-![CT Clamp](assets/CT-Clamp.png)
-##### Parts
+
+Parts:
 - [RJ45 Breakout Female](https://s.click.aliexpress.com/e/_c2yWUT9P)
 - [CT Clamp OPCT16AL 50A-25mA](https://s.click.aliexpress.com/e/_c4NxAtsz)
 
-Note: mount the CT on the mains feed to the inverter per the inverter manual; observe phase orientation and ensure the CT rating matches expected current.
+Mounting note: place the CT on the mains feed to the inverter per the inverter manual; observe phase orientation and CT rating.
 
-### Dummy NTC thermistor
-#### Used to allow lead-acid mode on the inverter
-![NTC - Port](assets/Inverter-NTC-port.png)
+### Dummy NTC (if required)
+Some inverters expect an NTC input to enable certain battery profiles. Use the correct resistor/thermistor equivalent only if you understand the inverter's requirements.
 ![Dummy NTC](assets/dummy-ntc.jpg)
-##### Parts
-- [RJ45 To Screw Terminal Adaptor RJ45 Male](https://s.click.aliexpress.com/e/_c352MJSZ)
-- [Metal Film Resistors Kit 300Pc](https://s.click.aliexpress.com/e/_c4ckVkhL)
 
-Purpose: some inverters require an NTC input to enable certain battery profiles. Use an appropriate resistor/thermistor equivalent only if you understand the inverter's requirements — incorrect values may cause unsafe charging behaviour.
+Parts (examples):
+- [RJ45 to screw terminal adaptor](https://s.click.aliexpress.com/e/_c352MJSZ)
+- Resistors kit (for building a dummy NTC if necessary)
 
-### Misc
-[PVC Single-Core Multi-Strand Power Cables, 25mm2, 5M](https://s.click.aliexpress.com/e/_c3MwGd3T)
-
-Also required: insulated tools, appropriate PPE, suitably rated fuses/breakers, crimping tools, heatshrink, and cable management.
-
+## Wiring & Misc
+- Cables: use appropriately rated multi-strand power cables (e.g., 25 mm² where required).
+- Tools/Safety: insulated tools, PPE, correct-rated fuses/breakers, crimping tools, heatshrink.
 
 ## Monitoring
-### RS485 Inverter -> RPi
-T568B:
-- Blue/White -> A 
-- Blue -> B
+### RS485 wiring (examples)
+RS485 pinouts used in this project (T568B RJ45 pin colours shown):
+
+- Inverter -> RPi (example):
+	- Blue/White -> A
+	- Blue -> B
+
+- BMS -> RPi (example):
+	- Orange -> A
+	- Orange/White -> B
 
 ![RS485 - Inverter](assets/RS485-Inverter.png)
-![RS485 - Inverter VPP](assets/Inverter-RS485(VPP)-port.png)
-
-### RS485 BMS -> RPi
-T568B:
-- Orange -> A
-- Orange/White -> B
-
 ![RS485 - BMS](assets/RS485-BMS.png)
-![RS485 - BMS - Port](assets/JK-PB1A16S10P.png)
 
-##### Parts
-[USB RS485](https://s.click.aliexpress.com/e/_c3fc73Fb)
+Parts:
+- [USB RS485 adapter](https://s.click.aliexpress.com/e/_c3srqCLT)
 
-Wiring note: keep RS485 cabling short and use shielded twisted pair; use USB-RS485 adapters on the Raspberry Pi, and configure the correct baud rate and Modbus registers when integrating.
+### Software
+- Solar Assistant: poll inverter and BMS registers and forward metrics (MQTT/DB) to Home Assistant or other systems. See Solar Assistant docs for device templates.
+- Home Assistant: use the Energy Dashboard to visualise production, consumption and battery state.
 
-### Solar Assistant
-#### Communicates with the Inverter and BMS 
-[Solar Assistant](https://solar-assistant.io/)
-![Solar Assistant](assets/SolarAssistant.jpg)
-
-Use Solar Assistant to poll inverter and BMS registers, process data, and forward metrics to Home Assistant or a local database. Follow Solar Assistant docs for device templates.
-
-### Home Assistant
-#### Home automation platform with an excellent Energy Dashboard
-[Home Assistant](https://www.home-assistant.io/)
-![Home Assistant](assets/HA.png)
-
-Integration: expose inverter/BMS metrics (for example via Solar Assistant's MQTT) to populate the Energy Dashboard and create automations.
-
-## Results
-Battery was enabled Tuesday 9 December. The chart below shows daily free electricity windows (darker grey/red) and the paid electricity (lighter grey/red). 
-
-The inverter has been set to charge the battery from the grid during these free periods
-
-After enabling the battery, purchased grid electricity drops to near zero, demonstrating significtly reduced purchased energy.
+## Results (Example)
+Battery was enabled on Tuesday 9 December. After enabling the battery and configuring inverter charging during free-tariff periods, purchased-grid energy dropped significantly in the observed week.
 
 ![Results](assets/Usage.png)
+![Results2](assets/Usage2.png)
+
+With exported energy rates considered, the system produced a modest profit over ~10 days of sunny weather in this example — results will vary widely by location, tariffs and battery condition.
+
+## Conclusion
+Is it worth it?
+
+It depends on the battery condition, purchase price and your local electricity tariffs. In my case I ended up with a ~14 kWh system (6 spare modules) for roughly NZ$3,700, which can be competitive with lower-end commercial battery offerings if you source a good pack.
