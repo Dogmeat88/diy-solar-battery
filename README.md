@@ -34,6 +34,7 @@ Save all high-current busbars, copper connectors and fasteners for reuse.
 Observed results (example):
 - ≈333 Wh per module
 - ≈16 kWh total raw capacity across modules (before pack reconfiguration and losses)
+- SoH ~66.67%
 
 ![Battery Modules Capacity](assets/Leaf%20Module%20Capacity.jpg)
 
