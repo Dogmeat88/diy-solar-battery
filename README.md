@@ -61,9 +61,8 @@ Parts example:
 [Growatt SPH6000 TL BL UP](https://s.click.aliexpress.com/e/_c4V2mrlf)
 
 Configuration notes:
-- I used a conservative battery voltage window (49–57 V) for safety.
-- If lithium communication/profiles are not available, some installers use the lead-acid profile with care — verify inverter behaviour and limits before leaving the system unattended.
-
+- I used a conservative battery voltage window (49–57 V) for improve battery longevity.
+- If lithium communication/profiles are not available or incompatable, the lead-acid profile can be used.
 ## Battery Management System (BMS)
 ### JK-PB1A16S10P
 Monitors cell voltages, balances cells, and provides protections and contactor control.
@@ -74,7 +73,6 @@ Parts example:
 
 Notes:
 - Verify RS485 wiring and BMS firmware/configuration for your pack topology.
-- Test balancing and alarm thresholds on a bench before connecting the full pack.
 
 ### CT Clamp (Power Measurement)
 Used to measure import/export current for the inverter.
@@ -93,8 +91,7 @@ Some inverters expect an NTC input to enable certain battery profiles. Use the c
 
 Parts (examples):
 - [RJ45 to screw terminal adaptor](https://s.click.aliexpress.com/e/_c352MJSZ)
-- Resistors kit (for building a dummy NTC if necessary)
-
+- Resistors kit
 ## Wiring & Misc
 - Cables: use appropriately rated multi-strand power cables (e.g., 25 mm² where required).
 - Tools/Safety: insulated tools, PPE, correct-rated fuses/breakers, crimping tools, heatshrink.
@@ -103,11 +100,11 @@ Parts (examples):
 ### RS485 wiring (examples)
 RS485 pinouts used in this project (T568B RJ45 pin colours shown):
 
-- Inverter -> RPi (example):
+- Inverter -> RPi:
 	- Blue/White -> A
 	- Blue -> B
 
-- BMS -> RPi (example):
+- BMS -> RPi:
 	- Orange -> A
 	- Orange/White -> B
 
@@ -118,8 +115,8 @@ Parts:
 - [USB RS485 adapter](https://s.click.aliexpress.com/e/_c3srqCLT)
 
 ### Software
-- Solar Assistant: poll inverter and BMS registers and forward metrics (MQTT/DB) to Home Assistant or other systems. See Solar Assistant docs for device templates.
-- Home Assistant: use the Energy Dashboard to visualise production, consumption and battery state.
+- [Solar Assistant](https://solar-assistant.io/): poll inverter and BMS registers and forward metrics (MQTT/DB) to Home Assistant or other systems. See Solar Assistant docs for device templates.
+- [Home Assistant](https://www.home-assistant.io/): use the Energy Dashboard to visualise production, consumption and battery state.
 
 ## Results (Example)
 Battery was enabled on Tuesday 9 December. After enabling the battery and configuring inverter charging during free-tariff periods, purchased-grid energy dropped significantly in the observed week.
@@ -132,4 +129,4 @@ With exported energy rates considered, the system produced a modest profit over 
 ## Conclusion
 Is it worth it?
 
-It depends on the battery condition, purchase price and your local electricity tariffs. In my case I ended up with a ~14 kWh system (6 spare modules) for roughly NZ$3,700, which can be competitive with lower-end commercial battery offerings if you source a good pack.
+It depends on the battery condition, purchase price and your local electricity prices. In my case I ended up with a ~14 kWh system (6 spare modules) for roughly NZ$3,700, which can be competitive with lower-end commercial battery offerings if you source a good pack.
