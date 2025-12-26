@@ -51,6 +51,9 @@ Key notes:
 - Ensure insulation, strain relief, and proper crimping for high-current conductors.
 - Perform balancing, insulation-resistance (megger) checks and low-current verification before applying full charge.
 - Keep spare modules for future replacement or testing.
+- 
+Nissan Leaf battery cells, which are lithium-ion pouch cells, naturally expand during charge/discharge cycles and aging. Proper compression (around 12 PSI is often cited) is crucial for longevity, maintaining contact, and preventing swelling-related faults.
+  
 
 ![Battery Module Configuration](assets/Leaf%20battery%20module%20configuration.png)
 ![Battery Module](assets/Battery.jpg)
