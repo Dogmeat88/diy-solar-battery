@@ -51,7 +51,7 @@ Key notes:
 - Ensure insulation, strain relief, and proper crimping for high-current conductors.
 - Perform balancing, insulation-resistance (megger) checks and low-current verification before applying full charge.
 - Keep spare modules for future replacement or testing.
-- 
+
 Nissan Leaf battery cells, which are lithium-ion pouch cells, naturally expand during charge/discharge cycles and aging. Proper compression (around 12 PSI is often cited) is crucial for longevity, maintaining contact, and preventing swelling-related faults.
   
 
@@ -67,8 +67,9 @@ Parts example:
 [Growatt SPH6000 TL BL UP](https://s.click.aliexpress.com/e/_c4V2mrlf)
 
 Configuration notes:
-- I used a conservative battery voltage window (49–57 V) for improve battery longevity.
-- If lithium communication/profiles are not available or incompatable, the lead-acid profile can be used.
+- I used a conservative battery voltage window (49–57 V) to improve battery longevity.
+- If lithium communication/profiles are not available or incompatible, the lead-acid profile can be used.
+
 ## Battery Management System (BMS)
 ### JK-PB1A16S10P
 Monitors cell voltages, balances cells, and provides protections and contactor control.
@@ -123,6 +124,20 @@ Parts:
 ### Software
 - [Solar Assistant](https://solar-assistant.io/): poll inverter and BMS registers and forward metrics (MQTT/DB) to Home Assistant or other systems. See Solar Assistant docs for device templates.
 - [Home Assistant](https://www.home-assistant.io/): use the Energy Dashboard to visualise production, consumption and battery state.
+
+## Fire Precautions
+
+### Risks
+Li-ion pouch cells can undergo thermal runaway if overcharged, damaged, or subject to a cell fault — producing intense heat, toxic off-gases, and fire that is difficult to extinguish. A pack of this size (~14 kWh) carries substantial stored energy and must be treated with care.
+
+### Precautions Taken
+- **100 A DC breaker** — overcurrent protection and rapid pack isolation.
+- **Steel housing** — non-combustible enclosure to contain any cell venting or fire.
+- **Detached garage** — physical separation from the main dwelling to protect occupants.
+- **Automatic fire extinguisher modules** — heat-triggered suppressant units mounted inside the enclosure for fast, autonomous response.
+  - [30g Aerosol automatic fire extinguishing sticker](https://s.click.aliexpress.com/e/_c2wIqZGr)
+- **Interconnected smoke alarms** — alarms in the garage are linked to the house system so any detection triggers all alarms, giving early warning to occupants regardless of where they are.
+- **Dry powder extinguisher** — a suitably rated dry powder extinguisher is mounted in an accessible location within the garage for immediate manual response.
 
 ## Results (Example)
 Battery was enabled on Tuesday 9 December. After enabling the battery and configuring inverter charging during free-tariff periods, purchased-grid energy dropped significantly in the observed week.
