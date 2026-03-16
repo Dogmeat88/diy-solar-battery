@@ -5,6 +5,8 @@ Repurposing a used Nissan Leaf 24 kWh battery pack into a home solar-storage sys
 
 This project is intended for experienced DIYers. High-voltage DC is hazardous — use appropriate PPE and only proceed if you are qualified.
 
+**Disclosure:** This README contains affiliate links. I may earn a commission from qualifying purchases. #Ad
+
 ## Quick Facts
 - Nominal pack configuration: 14S6P (~48–58 V DC)
 - Approximate usable capacity: ~14 kWh (pack dependent)
